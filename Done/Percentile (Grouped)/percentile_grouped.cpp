@@ -5,6 +5,7 @@
 
 using namespace std;
 
+void percentile_grouped(int classes);
 
 main(void) {
 /* DECLARATION OF VARIABLES */
@@ -14,6 +15,13 @@ main(void) {
 	cout << "Enter number of classes: ";
 	cin >> classes;
 
+	percentile_grouped(classes);
+
+	getch();
+	return 0;
+}
+
+void percentile_grouped(int classes) {
 /* DYNAMIC ALLOCATION OF ARRAYS lower_limit AND upper_limit */
 	double *lower_limit = new double[classes], *upper_limit = new double[classes];
 
