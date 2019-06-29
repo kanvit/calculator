@@ -1,4 +1,4 @@
-/* COMPUTES MEDIAN OF UNGROUPED DATA */
+/* COMPUTES MEDIAN OF DISCRETE FREQUENCY DATA */
 
 #include <iostream>
 #include <conio.h>
@@ -6,22 +6,30 @@
 
 using namespace std;
 
-main(void)
-{
+double median_discrete(int classes);
+
+main(void) {
 	int classes;
 
 /* PROMPT FOR NUMBER OF CLASSES */
 	cout << "Enter the number of classes: ";
 	cin >> classes;
-	
+
+	double median = median_discrete(classes);
+	cout << "Median: " << median;
+
+	getch();
+	return 0;
+}
+
+double median_discrete(int classes) {
 /* DYNAMIC ALLOCATION OF x */
 	double *x = new double[classes];
 	double *y = new double[classes];
-	double *frequency_y = new double[classes];
+
 /* LOOP TO OBTAIN THE VALUES OF x */
 	cout << "Enter the classes sequentially:\n";
-	for(int i = 1; i <= classes; i++)
-	{
+	for(int i = 1; i <= classes; i++) {
 		cout << i << ". ";
 		cin >> x[i];
 		y[i] = x[i];
@@ -41,13 +49,12 @@ main(void)
 	cumulative_frequency[0] = 0;
 
 	cout << "Enter the corresponding frequency:\n";
-	for(int i = 1; i <= classes; i++)
-	{
+	for(int i = 1; i <= classes; i++) {
 		cout << i << ". ";
 		cin >> frequency[i];
 	}
 
-
+	double *frequency_y = new double[classes];
 	for(int i = 1; i <= classes; i++) {
 		for(int j = 1; j <= classes; j++) {
 			if(x[i] == y[j]) {
@@ -63,44 +70,33 @@ main(void)
 		n = cumulative_frequency[classes] / 2;
 		m = (cumulative_frequency[classes] / 2) + 1;
 
-		for(int i = 1; i <= classes; i++) {
+		for(int i = 1; i <= classes; i++)
 			if(n <= cumulative_frequency[i]) {
 				k = x[i];
 				break;
 			}
-		}
 
-		for(int i = 1; i <= classes; i++) {
+		for(int i = 1; i <= classes; i++)
 			if(m <= cumulative_frequency[i]) {
 				j = x[i];
 				break;
 			}
-		}
 
 		median = (k + j) / 2;
 	}
 
-	else if(int(cumulative_frequency[classes]) % 2 == 1)
-	{
+	else if(int(cumulative_frequency[classes]) % 2 == 1) {
 		n = (cumulative_frequency[classes] + 1) / 2;
 
 		for(int i = 1; i <= classes; i++)
-		{
-			if(n <= cumulative_frequency[i])
-			{
+			if(n <= cumulative_frequency[i]) {
 				k = y[i];
 				break;
 			}
-		}
 
 		median = k;
 	}
 
 
-	cout << "Median: " << median << endl;
-	getch();
-
-/* DEALLOCATION OF MEMORY GIVEN TO VARIABLES */
-	delete x, frequency, cumulative_frequency;
-	return 0;
+	return median;
 }	
