@@ -7,7 +7,7 @@
 using namespace std;
 
 double absolute(double x);
-double MD_mean(int classes);
+double MD_mean_discrete(int classes);
 
 main(void) {
 	int classes;
@@ -16,19 +16,18 @@ main(void) {
 	cout << "Enter the number of classes: ";
 	cin >> classes;
 	
-	double meanDeviationAboutMean = MD_mean(classes);
+	double meanDeviationAboutMean = MD_mean_discrete(classes);
 
 	cout << "Mean Deviation about Mean: " << meanDeviationAboutMean << endl;
 	getch();
 }
-double MD_mean(int classes) {
-/* DYNAMIC ALLOCATION OF ARRAY class_marks */
-	double *class_mark = new double[classes];
-	double sum_class_mark = 0;
 
+double MD_mean_discrete(int classes) {
+/* DYNAMIC ALLOCATION OF ARRAY class_marks */
+	double *class_mark = new double[classes], sum_class_mark = 0;;
+	
 /* LOOP TO OBTAIN CLASS MARKS */
 	cout << "Enter the class marks:\n";
-
 	for(int i = 0; i < classes; i++) {
 		cout << i + 1 << ". ";
 		cin >> class_mark[i];
@@ -39,8 +38,7 @@ double MD_mean(int classes) {
 	double mean = sum_class_mark / classes;
 
 /* DYNAMIC ALLOCATION OF  ARRAY mean_deviation */
-	double *mean_deviation = new double[classes];
-	double sum_mean_deviation = 0;
+	double *mean_deviation = new double[classes], sum_mean_deviation = 0;
 
 /* LOOP TO EVALUATE mean_deviation */
 	for(int i = 0; i < classes; i++) {
