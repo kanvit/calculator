@@ -6,7 +6,7 @@
 
 using namespace std;
 
-void decile_ungrouped(int observations);
+void decile_discrete(int observations);
 
 main(void) {
 	int observations;
@@ -14,21 +14,15 @@ main(void) {
 	cout << "Enter number of class marks: ";
 	cin >> observations;
 
-	decile_ungrouped(observations);
+	decile_discrete(observations);
 
 	getch();
 	return 0;
 }
 
-void decile_ungrouped(int observations) {
-	double *class_marks, decobs, decile[10];
-/* DECLARATION OF VARIABLES DONE */
-
-
-	system("cls");
-
+void decile_discrete(int observations) {
 /* DYNAMIC ALLOCATION OF ARRAY class_marks BASED ON THE VALUE OF observations */
-	class_marks = new double[observations];
+	double *class_marks = new double[observations];
 
 	cout << "Enter class marks:\n";
 /* LOOP TO OBTAIN THE CLASS MARKS BASED ON THE VALUE OF observations */
@@ -50,6 +44,7 @@ void decile_ungrouped(int observations) {
 
 	system("cls");
 
+	double decobs, decile[10];
 /* LOOP TO EVALUATE THE DECILES */
 	for(int i = 1; i <= 9; i++) {
  		decobs = (i * (double(observations) + 1)) / 10;
@@ -64,5 +59,4 @@ void decile_ungrouped(int observations) {
 	for(int j = 1; j <= 9; j++)
 		cout << "|\t" << j << "\t|\t" << decile[j] << "\t|" << endl;
 	
-
 }
