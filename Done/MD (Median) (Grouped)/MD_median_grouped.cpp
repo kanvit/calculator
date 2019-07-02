@@ -7,24 +7,23 @@
 using namespace std;
 
 double absolute(double x);
-double MD_median(int classes);
+double MD_median_grouped(int classes);
 
 main(void) {
 	int classes;
 	cout << "Enter the number of classes: ";
 	cin >> classes;
 
-	double meanDeviationAboutMedian = MD_median(classes);
+	double meanDeviationAboutMedian = MD_median_grouped(classes);
 	cout << "Mean Divation about Median: " << meanDeviationAboutMedian << endl;
 
 	getch();
 	return 0;
 }
 
-double MD_median(int classes) {
+double MD_median_grouped(int classes) {
 /* DYNAMIC ALLOCATION OF lower_limit AND upper_limit BASED ON classes */
-	double *lower_limit = new double[classes];
-	double *upper_limit = new double[classes];
+	double *lower_limit = new double[classes], *upper_limit = new double[classes];
 
 	cout << "Enter:\n";
 	cout << "Lower limit of the first class: ";
@@ -36,8 +35,7 @@ double MD_median(int classes) {
 	int class_size = upper_limit[1] - lower_limit[1];
 
 /* LOOP TO CALCULATE THE REMAINING LOWER AND UPPER LIMITS */
-	for(int i = 2; i <= classes; i++)
-	{
+	for(int i = 2; i <= classes; i++) {
 		lower_limit[i] = upper_limit[i - 1];
 		upper_limit[i] = lower_limit[i] + class_size;
 	}
@@ -45,12 +43,10 @@ double MD_median(int classes) {
 /* DYNAMIC ALLOCATION OF THE ARRAY frequency AND cumulative_frequency */
 	int *frequency = new int[classes];
 	double *cumulative_frequency = new double[classes];
-
 	cumulative_frequency[0] = 0;
 /* LOOP TO PROMPT FOR THE FREQUENCY */
 	cout << "Enter the corresponding frequencies:\n";
-	for(int i = 1; i <= classes; i++)
-	{
+	for(int i = 1; i <= classes; i++) {
 		cout << i << ". ";
 		cin >> frequency[i];
 
@@ -59,21 +55,17 @@ double MD_median(int classes) {
 
 
 /* EVALUATION OF n */
-	double n = (cumulative_frequency[classes] / 2);
-	double median;
+	double n = (cumulative_frequency[classes] / 2), median;
 /* LOOP TO CALCULATE THE MEDIAN */
-	for(int i = 1; i <= classes; i++)
-	{
-		if(n <= cumulative_frequency[i])
-		{
+	for(int i = 1; i <= classes; i++) {
+		if(n <= cumulative_frequency[i]) {
 			median = lower_limit[i] + (((n - cumulative_frequency[i - 1]) / frequency[i]) * class_size);
+
 			break;
 		}
 	}
 
-	double *class_marks = new double[classes];
-	double *mean_deviation = new double[classes];
-	double sum_mean_deviation = 0;
+	double *class_marks = new double[classes], *mean_deviation = new double[classes], sum_mean_deviation = 0;
 	for(int i = 1; i <= classes; i++) {
 		class_marks[i] = (lower_limit[i] + upper_limit[i]) / 2;
 		mean_deviation[i] = class_marks[i] - median;
