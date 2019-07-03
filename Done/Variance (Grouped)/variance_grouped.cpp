@@ -28,8 +28,7 @@ double variance_grouped(int classes) {
 	double *lower_limit = new double[classes], *upper_limit = new double[classes], *x = new double[classes];
 
 /* PROMPT FOR LOWER LIMIT AND UPPER LIMIT OF THE FIRST CLASS */
-	cout << "Enter:\n";
-	cout << "Lower Limit of the first class: ";
+	cout << "Enter:\nLower Limit of the first class: ";
 	cin >> lower_limit[1];
 
 	cout << "Upper Limit of the first class: ";
